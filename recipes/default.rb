@@ -86,7 +86,7 @@ when "init"
 end
 
 # render znc.conf
-users = search(:users, 'groups:znc')
+users = search(:znc_users, '*:*')
 template "#{node['znc']['data_dir']}/configs/znc.conf" do
   source "znc.conf.erb"
   mode 0600
