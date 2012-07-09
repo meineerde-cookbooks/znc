@@ -22,7 +22,7 @@ include_recipe "znc::#{node['znc']['install_method']}"
 user node['znc']['user']
 group node['znc']['group']
 
-[ node['znc']['data_dir'], 
+[ node['znc']['data_dir'],
   node['znc']['conf_dir'],
   node['znc']['module_dir'],
   node['znc']['users_dir']

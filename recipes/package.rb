@@ -33,5 +33,4 @@ else
       action :install
     end
   end
-
 end
