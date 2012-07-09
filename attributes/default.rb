@@ -28,6 +28,8 @@ else
   set['znc']['group'] = 'znc'
 end
 
+default['znc']['init_style']      = 'init'
+
 default['znc']['conf_dir']        = "#{znc['data_dir']}/configs"
 default['znc']['log_dir']         = "#{znc['data_dir']}/moddata/adminlog"
 default['znc']['module_dir']      = "#{znc['data_dir']}/modules"

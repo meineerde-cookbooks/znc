@@ -47,32 +47,46 @@ bash "generate-pem" do
   creates "#{node['znc']['data_dir']}/znc.pem"
 end
 
-template "/etc/init.d/znc" do
-  source "znc.init.erb"
-  owner "root"
-  group "root"
-  mode "0755"
-end
 
-service "znc" do
-  supports :restart => true
-  action [:enable, :start]
-end
+case node['znc']['init_style']
+when "runit"
+  include_recipe "runit"
 
-users = search(:users, 'groups:znc')
+  runit_service "znc"
+  service "znc" do
+    supports :reload => true
+    reload_command "#{node[:runit][:sv_bin]} hup #{node[:runit][:service_dir]}/znc"
+  end
 
-# znc doesn't like to be automated...this prevents a race condition
-# http://wiki.znc.in/Configuration#Editing_config
-execute "force-save-znc-config" do
-  command "pkill -SIGUSR1 znc"
-  action :run
-end
-execute "reload-znc-config" do
-  command "pkill -SIGHUP znc"
-  action :nothing
+  # znc doesn't like to be automated...this prevents a race condition
+  # http://wiki.znc.in/Configuration#Editing_config
+  execute "force-save-znc-config" do
+    command "#{node[:runit][:sv_bin]} 1 #{node[:runit][:service_dir]}/znc"
+    action :run
+  end
+when "init"
+  template "/etc/init.d/znc" do
+    source "znc.init.erb"
+    owner "root"
+    group "root"
+    mode "0755"
+  end
+
+  service "znc" do
+    supports :reload => true, :restart => true
+    action [ :enable, :start ]
+  end
+
+  # znc doesn't like to be automated...this prevents a race condition
+  # http://wiki.znc.in/Configuration#Editing_config
+  execute "force-save-znc-config" do
+    command "pkill -SIGUSR1 znc"
+    action :run
+  end
 end
 
 # render znc.conf
+users = search(:users, 'groups:znc')
 template "#{node['znc']['data_dir']}/configs/znc.conf" do
   source "znc.conf.erb"
   mode 0600
@@ -81,6 +95,6 @@ template "#{node['znc']['data_dir']}/configs/znc.conf" do
   variables(
     :users => users
   )
-  notifies :run, "execute[reload-znc-config]", :immediately
+  notifies :reload, "service[znc]", :immediately
 end
 

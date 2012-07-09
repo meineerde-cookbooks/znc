@@ -32,5 +32,5 @@ bash "build colloquy znc module" do
   mv colloquy.so #{node['znc']['module_dir']}/
   EOF
   creates "#{node['znc']['module_dir']}/colloquy.so"
-  notifies :run, "execute[reload-znc-config]", :immediately
+  notifies :reload, "service[znc]", :immediately
 end

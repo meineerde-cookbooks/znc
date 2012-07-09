@@ -1,0 +1,4 @@
+#!/bin/sh
+PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
+exec 2>&1
+exec chpst -u <%= node['znc']['user'] %>:<%= node['znc']['group'] %> znc -d <%= node['znc']['data_dir'] %>
