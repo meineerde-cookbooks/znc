@@ -20,42 +20,42 @@ LoadModule   = <%= "#{mod} #{params}".strip  %>
 
 <% @users.each do |u| %>
 <User <%= u['id']  %>>
-	Pass = <%= u['pass'] %>
-	Nick = <%= u['nick'] || u['id'] %>
-	AltNick = <%= u['alt_nick'] || "#{u['nick'] || u['id']}_" %>
-	Ident = <%= u['ident'] || u['nick'] || u['id'] %>
-	RealName = <%= u['real_name'] %>
-	QuitMsg = <%= u['quit_msg'] || 'Good Bye!' %>
-	ChanModes = <%= u['chan_modes'] || '+stn' %>
-	Buffer = <%= u['buffer'] || 50 %>
-	KeepBuffer = <%= u['keep_buffer'] || false %>
-	MultiClients = true
-	BounceDCCs = true
-	DenyLoadMod = false
-	Admin = <%= (!!u['admin']).to_s %>
-	DenySetBindHost = false
-	DCCLookupMethod = default
-	TimestampFormat = [%H:%M:%S]
-	AppendTimestamp = false
-	PrependTimestamp = true
-	TimezoneOffset = <%= u['timezone_offset'] || '0.00' %>
-	JoinTries = 10
-	MaxJoins = 5
-	IRCConnectEnabled = true
+  Pass = <%= u['pass'] %>
+  Nick = <%= u['nick'] || u['id'] %>
+  AltNick = <%= u['alt_nick'] || "#{u['nick'] || u['id']}_" %>
+  Ident = <%= u['ident'] || u['nick'] || u['id'] %>
+  RealName = <%= u['real_name'] %>
+  QuitMsg = <%= u['quit_msg'] || 'Good Bye!' %>
+  ChanModes = <%= u['chan_modes'] || '+stn' %>
+  Buffer = <%= u['buffer'] || 50 %>
+  KeepBuffer = <%= u['keep_buffer'] || false %>
+  MultiClients = true
+  BounceDCCs = true
+  DenyLoadMod = false
+  Admin = <%= (!!u['admin']).to_s %>
+  DenySetBindHost = false
+  DCCLookupMethod = default
+  TimestampFormat = [%H:%M:%S]
+  AppendTimestamp = false
+  PrependTimestamp = true
+  TimezoneOffset = <%= u['timezone_offset'] || '0.00' %>
+  JoinTries = 10
+  MaxJoins = 5
+  IRCConnectEnabled = true
 
-	Allow = *
+  Allow = *
 
   <% u['modules'].each do |mod,params| -%>
-	LoadModule = <%= "#{mod} #{params}".strip  %>
+  LoadModule = <%= "#{mod} #{params}".strip  %>
   <% end -%>
 
   <% u['servers'].each do |server, port| %>
-	Server = <%= "#{server} #{port}".strip %>
-	<% end %>
-	<% u['channels'].each do |chan,options| -%>
+  Server = <%= "#{server} #{port}".strip %>
+  <% end %>
+  <% u['channels'].each do |chan,options| -%>
 
-	<Chan <%= chan %>>
-	</Chan>
-	<% end -%>
+  <Chan <%= chan %>>
+  </Chan>
+  <% end -%>
 </User>
 <% end -%>
