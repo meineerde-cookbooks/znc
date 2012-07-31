@@ -6,6 +6,8 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "0.0.1"
 
 depends "build-essential"
+depends "cron"
+depends "python"
 depends "runit"
 
 %w{ debian ubuntu }.each do |os|

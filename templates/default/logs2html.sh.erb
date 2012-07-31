@@ -1,0 +1,12 @@
+#!/bin/bash
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+<% @logged.each_pair do |user, channels| %>
+# Channels for <%= user %>
+<% channels.each do |channel| %>
+logs2html -g "<%= node['znc']['data_dir'] %>/users/<%= user %>/moddata/log/<%= channel %>_*.log" "<%= node['znc']['logs2html']['output_dir'] %>/<%= user %>/<%= channel %>"
+cp -au "<%= node['znc']['data_dir'] %>/users/<%= user %>/moddata/log/<%= channel %>"_*.html "<%= node['znc']['logs2html']['output_dir'] %>/<%= user %>/<%= channel %>"
+<% end %>
+
+<% end %>
