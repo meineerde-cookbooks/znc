@@ -20,15 +20,15 @@
 include_recipe "znc"
 
 # znc > 0.0.9 required...this means compiling from source on most platforms
-remote_file "#{node['znc']['module_dir']}/colloquy.cpp" do
+remote_file "#{node['znc']['data_dir']}/modules/colloquy.cpp" do
   source "https://github.com/wired/colloquypush/raw/master/znc/colloquy.cpp"
   mode "0644"
-  not_if {::File.exists?("#{node['znc']['module_dir']}/colloquy.so")}
+  not_if {::File.exists?("#{node['znc']['data_dir']}/modules/colloquy.so")}
 end
 
 bash "znc-buildmod colloquy.cpp" do
-  cwd node['znc']['module_dir']
-  creates "#{node['znc']['module_dir']}/colloquy.so"
+  cwd "#{node['znc']['data_dir']}/modules"
+  creates "#{node['znc']['data_dir']}/modules/colloquy.so"
   notifies :reload, "service[znc]", :immediately
 end
 

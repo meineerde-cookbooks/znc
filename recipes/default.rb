@@ -19,17 +19,25 @@
 
 include_recipe "znc::#{node['znc']['install_method']}"
 
-user node['znc']['user']
-group node['znc']['group']
+group node['znc']['group'] do
+  system true
+end
+user node['znc']['user'] do
+  system true
+  gid node['znc']['group']
+  shell "/bin/bash"
+  home node['znc']['data_dir']
+end
 
-[ node['znc']['data_dir'],
-  node['znc']['conf_dir'],
-  node['znc']['module_dir'],
-  node['znc']['users_dir']
-].each do |dir|
-  directory dir do
+directory node['znc']['data_dir'] do
+  owner node['znc']['user']
+  group node['znc']['group']
+end
+%w[configs moddata/adminlog modules users].each do |dir|
+  directory node['znc']['data_dir'] + "/#{dir}" do
     owner node['znc']['user']
     group node['znc']['group']
+    mode "0750"
   end
 end
 

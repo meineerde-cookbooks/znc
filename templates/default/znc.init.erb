@@ -7,11 +7,10 @@
 # Description:       This is the init-Script for znc.
 ### END INIT INFO
 
-# Original Author: Henner M. Kruse
-# Author: Seth Chisamore
+# This config was automatically created by Chef.
+# All manual changes are going to be overridden
 #
-# Please remove the "Author" lines above and replace them
-# with your own name if you copy and modify this script.
+# Source: znc::templates/default/znc.init.erb
 
 # Do NOT "set -e"
 
@@ -20,7 +19,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
 DESC="znc, an advanced modular IRC bouncer"
 NAME=znc
 DAEMON=$(which $NAME)
-DAEMON_ARGS="-d /etc/znc"
+DAEMON_ARGS="-d '<%= ['znc']['data_dir'] %>'"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 USER=<%= node['znc']['user'] %>
