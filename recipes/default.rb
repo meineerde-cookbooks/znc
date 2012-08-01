@@ -51,7 +51,7 @@ bash "generate-pem" do
   cat znc.key znc.crt > znc.pem
   EOH
   user node['znc']['user']
-  group node['znc']['grouip']
+  group node['znc']['group']
   creates "#{node['znc']['data_dir']}/znc.pem"
 end
 
