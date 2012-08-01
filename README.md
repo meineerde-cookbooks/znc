@@ -79,8 +79,7 @@ The cookbook is mainly configured through data bags. Each user has a data bag it
 
 # License and Author
 
-Author:: Holger Just <hjust@meine-er.de>
-Copyright:: 2012, Holger Just, 2011 Seth Chisamore
+Copyright (c) 2012 Holger Just, 2011 Seth Chisamore
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
