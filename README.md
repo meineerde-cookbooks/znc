@@ -15,6 +15,8 @@ Installs and configures ZNC, an IRC bouncer.
 
 Include the default recipe in a run list, to get `znc`.  By default `znc` is installed from packages but this can be changed by using the `install_method` attribute.
 
+Using the `init_style` attribute, you can install ZNC either under the old SysV Init or runit. While the conservative default is `init`, I recommend `runit`.
+
 ## package
 
 This recipe installs ZNC from packages.
@@ -76,7 +78,6 @@ The cookbook is mainly configured through data bags. Each user has a data bag it
 # License and Author
 
 Author:: Holger Just <hjust@meine-er.de>
-
 Copyright:: 2012, Holger Just, 2011 Seth Chisamore
 
 Licensed under the Apache License, Version 2.0 (the "License");
