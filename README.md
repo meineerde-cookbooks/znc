@@ -33,6 +33,8 @@ Installs the [colloquy module](http://wiki.znc.in/Colloquy) to send push notitif
 
 Installs the [irclog2html](http://mg.pov.lt/irclog2html/) python package and configures it to process selected channels into HTML files.
 
+The irclog2html package still requires a little patch to actually work with ZNC. See the [respective bug on Launchpad](https://bugs.launchpad.net/irclog2html/+bug/1031642) for details.
+
 # Databags
 
 The cookbook is mainly configured through data bags. Each user has a data bag item under `znc_users`. An example databag item is below.
