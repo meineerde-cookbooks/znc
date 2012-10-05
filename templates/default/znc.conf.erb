@@ -6,14 +6,14 @@
 //
 // Source: znc::templates/default/znc.conf.erb
 
-AnonIPLimit  = 10
+AnonIPLimit  = <%= node['znc']['anon_ip_limit'] %>
 MaxBufferSize= <%= node['znc']['max_buffer_size'] %>
 SSLCertFile  = <%= node['znc']['data_dir'] %>/znc.pem
-Listener4    = +7777
-ConnectDelay = 5
-ServerThrottle = 30
+Listener4    = <%= node['znc']['port'] %>
+ConnectDelay = <%= node['znc']['connect_delay'] %>
+ServerThrottle = <%= node['znc']['server_throttle'] %>
 Skin         = <%= node['znc']['skin'] %>
-StatusPrefix = *
+StatusPrefix = <%= node['znc']['status_prefix'] %>
 <% node['znc']['modules'].each do |mod,params| -%>
 LoadModule   = <%= "#{mod} #{params}".strip  %>
 <% end -%>

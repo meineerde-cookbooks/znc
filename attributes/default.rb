@@ -25,6 +25,12 @@ default['znc']['group'] = 'znc'
 
 default['znc']['data_dir']        = "/etc/znc"
 
+
+default['znc']['anon_ip_limit']   = 10
+default['znc']['connect_delay']   = 5
+default['znc']['server_throttle'] = 30
+default['znc']['status_prefix']   = "*"
+
 default['znc']['port']            = "+7777"
 default['znc']['skin']            = "dark-clouds"
 default['znc']['max_buffer_size'] = 500
